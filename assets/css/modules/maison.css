@@ -2,8 +2,16 @@
    LA MAISON — mur crème, panneaux photo accrochés, composition asymétrique
    ========================================================================= */
 
+/* Mur bicolore : la cimaise passe derrière le bas des photos,
+   qui chevauchent la ligne comme les panneaux sur la façade. */
 .maison {
-  background: var(--creme);
+  --cimaise: clamp(150px, 24vw, 280px);
+  background: linear-gradient(
+    to top,
+    var(--rose) 0,
+    var(--rose) var(--cimaise),
+    var(--creme) var(--cimaise)
+  );
   padding: clamp(4.5rem, 12vw, 8.5rem) var(--pad) clamp(4rem, 10vw, 7rem);
 }
 
@@ -12,7 +20,7 @@
 .maison__title {
   font-family: var(--f-display);
   font-weight: 520;
-  font-size: clamp(2.1rem, 8vw, 4.4rem);
+  font-size: clamp(2.4rem, 9vw, 5.2rem);
   line-height: 1.08;
   color: var(--brun);
   margin-top: 1rem;

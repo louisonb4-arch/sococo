@@ -1,4 +1,7 @@
 import { boot, motionReduced } from './core/motion.js';
+import initDouceurs from './modules/douceurs.js';
+
+document.addEventListener('DOMContentLoaded', initDouceurs);
 
 /* Si reduced-motion : retirer le loader immédiatement */
 if (motionReduced) {

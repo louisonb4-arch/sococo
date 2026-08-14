@@ -29,6 +29,16 @@
   color: var(--rose-clair);
   margin: 0 1.1rem;
 }
+.marquee__group em {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 470;
+  text-transform: none;
+  letter-spacing: 0.04em;
+  font-size: 1.3em;
+  vertical-align: -0.06em;
+  color: var(--rose-clair);
+}
 @keyframes marquee-scroll { to { translate: -50% 0; } }
 
 @media (prefers-reduced-motion: reduce) {

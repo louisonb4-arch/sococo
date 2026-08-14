@@ -1,8 +1,9 @@
-/* Footer — le bois sombre de la réglette */
+/* Footer — le bois sombre de la réglette, signé d'un wordmark géant rogné */
 .site-footer {
   background: var(--brun);
   color: var(--creme);
-  padding: clamp(3.5rem, 9vw, 5.5rem) var(--pad) 2.2rem;
+  padding: clamp(3.5rem, 9vw, 5.5rem) var(--pad) 0;
+  overflow: hidden;
 }
 
 .site-footer__inner {
@@ -15,13 +16,19 @@
 }
 
 .site-footer__mark {
+  display: flex;
+  justify-content: center;
+  gap: 0.16em;
   font-family: var(--f-display);
   font-weight: 560;
-  font-size: 2.4rem;
-  line-height: 0.98;
-  letter-spacing: 0.05em;
+  font-size: clamp(4.2rem, 17vw, 13rem);
+  line-height: 0.74;
+  letter-spacing: 0.02em;
+  margin-top: clamp(2.2rem, 6vw, 4rem);
+  margin-bottom: -0.06em;
+  color: #5e4835;
+  user-select: none;
 }
-.site-footer__mark span { display: block; }
 .site-footer__mark span:first-child { color: var(--rose-clair); }
 
 .site-footer__tag {

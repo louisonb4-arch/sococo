@@ -13,7 +13,7 @@
 .infos__title {
   font-family: var(--f-display);
   font-weight: 520;
-  font-size: clamp(2.1rem, 8vw, 4.4rem);
+  font-size: clamp(2.4rem, 9vw, 5.2rem);
   line-height: 1.08;
   margin-top: 1rem;
 }
@@ -38,15 +38,29 @@
 
 .infos__cell dd { display: grid; gap: 0.55rem; justify-items: start; }
 
+/* Horaires : jours en étiquette, heures en didone généreuse */
 .infos__line {
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
   gap: 1.5rem;
   width: 100%;
-  max-width: 340px;
-  font-size: 0.95rem;
+  max-width: 420px;
 }
-.infos__line span:last-child { font-weight: 480; white-space: nowrap; }
+.infos__line span:first-child {
+  font-size: 0.72rem;
+  font-weight: 480;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+.infos__line span:last-child {
+  font-family: var(--f-display);
+  font-weight: 520;
+  font-size: clamp(1.5rem, 4.6vw, 2.1rem);
+  line-height: 1.15;
+  white-space: nowrap;
+}
 
 .infos__line--block {
   font-family: var(--f-display);

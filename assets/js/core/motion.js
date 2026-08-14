@@ -24,14 +24,19 @@ export const moduleDelays = (increment = 350, base = 550, target = document.body
 /* Masque par mot — le mot est le masque, son contenu monte */
 export const splitWords = (el) => {
   if (el.dataset.splitDone) return;
-  const text = el.textContent.trim().replace(/\s+/g, ' ');
-  const words = text.split(' ');
+  // Parcours des nœuds pour préserver l'italique (<i>) mot à mot
+  const parts = [];
+  el.childNodes.forEach((n) => {
+    const italic = n.nodeType === 1 && n.tagName === 'I';
+    (n.textContent || '').split(/\s+/).filter(Boolean).forEach((w) => parts.push({ w, italic }));
+  });
+  const text = parts.map((p) => p.w).join(' ');
   el.setAttribute('aria-label', text);
-  el.innerHTML = words.map((word, i) =>
-    `<span class="word" aria-hidden="true" style="--word-index:${i}">` +
-    `<span class="word__inner">${word}</span></span>`
+  el.innerHTML = parts.map((p, i) =>
+    `<span class="word${p.italic ? ' word--i' : ''}" aria-hidden="true" style="--word-index:${i}">` +
+    `<span class="word__inner">${p.w}</span></span>`
   ).join(' ');
-  el.style.setProperty('--word-total', words.length);
+  el.style.setProperty('--word-total', parts.length);
   el.dataset.splitDone = 'true';
 };
 

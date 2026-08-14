@@ -223,6 +223,9 @@ html.--js-inview-enabled [data-reveal="line"].is-inview { animation-play-state: 
 /* Stagger typographique par mot */
 .word { display: inline-block; overflow: hidden; vertical-align: top; }
 .word__inner { display: inline-block; }
+.word--i { font-style: italic; }
+/* Le mot italique prend le rose sur les murs crème */
+.maison__title .word--i, .boutique__title .word--i { color: var(--rose); }
 html.--js-inview-enabled [data-split] .word__inner {
   --ty: 112%;
   animation: v-translate var(--dur-slow, 950ms) var(--ease-out, ease)

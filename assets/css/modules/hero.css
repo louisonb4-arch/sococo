@@ -84,7 +84,24 @@
   padding: 4svh var(--pad) 6svh;
 }
 
-.hero__enseigne { text-align: center; }
+.hero__enseigne { text-align: center; position: relative; z-index: 1; }
+
+/* Watermark peint sur le mur, derrière l'enseigne */
+.hero__watermark {
+  position: absolute;
+  z-index: 0;
+  right: -4%;
+  top: 2%;
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 460;
+  font-size: clamp(10rem, 30vw, 26rem);
+  line-height: 1;
+  color: var(--rose);
+  opacity: 0.14;
+  pointer-events: none;
+  user-select: none;
+}
 
 .hero__reglette {
   display: block;
@@ -139,7 +156,7 @@
 .hero__baseline em { font-style: normal; color: var(--rose); }
 
 /* ---------- Panneau secondaire (desktop) — celui de la porte ---------- */
-.hero__side { display: none; }
+.hero__side { display: none; position: relative; z-index: 1; }
 
 /* ---------- Soubassement rose ---------- */
 .hero__band {

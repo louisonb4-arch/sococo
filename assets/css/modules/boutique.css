@@ -2,8 +2,15 @@
    LA BOUTIQUE — retour au mur crème, façade en large + étagères
    ========================================================================= */
 
+/* Mur bicolore : cimaise derrière le bas de la section, avant les infos roses */
 .boutique {
-  background: var(--creme);
+  --cimaise: clamp(150px, 24vw, 300px);
+  background: linear-gradient(
+    to top,
+    var(--rose) 0,
+    var(--rose) var(--cimaise),
+    var(--creme) var(--cimaise)
+  );
   padding: clamp(4.5rem, 12vw, 8.5rem) var(--pad) clamp(4rem, 10vw, 7rem);
 }
 
@@ -12,16 +19,18 @@
 .boutique__title {
   font-family: var(--f-display);
   font-weight: 520;
-  font-size: clamp(2.1rem, 8vw, 4.4rem);
+  font-size: clamp(2.4rem, 9vw, 5.2rem);
   line-height: 1.08;
   color: var(--brun);
   margin-top: 1rem;
 }
 
+/* Façade bord à bord — le mur du site s'efface devant le vrai mur */
 .boutique__facade {
-  max-width: 1200px;
-  margin: clamp(2.2rem, 6vw, 4rem) auto 0;
+  margin: clamp(2.2rem, 6vw, 4rem) calc(-1 * var(--pad)) 0;
 }
+.boutique__facade .frame { border-radius: 0; }
+.boutique__facade figcaption { padding: 0 var(--pad); }
 
 .boutique__grid {
   max-width: 1200px;
