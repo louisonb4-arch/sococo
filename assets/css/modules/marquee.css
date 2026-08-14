@@ -1,4 +1,9 @@
 /* Marquee — bandeau brun entre le mur et la suite */
+/* Mobile : pas de bandeau — budget motion réduit, transition hero → maison directe */
+@media (max-width: 899px) {
+  .marquee { display: none; }
+}
+
 .marquee {
   background: var(--brun);
   color: var(--creme);

@@ -10,6 +10,8 @@ html.js .site-loader {
   background: var(--creme);
   display: grid;
   place-items: center;
+  align-content: center;
+  gap: 1.3rem;
   opacity: 1;
   will-change: opacity;
 }
@@ -38,6 +40,25 @@ html.js .site-loader {
 .site-loader__row:nth-child(3) > span { animation: loader-rise 700ms var(--ease-out) 360ms forwards; }
 
 @keyframes loader-rise { to { translate: 0 0; } }
+
+.site-loader__sub {
+  font-family: var(--f-sans);
+  font-weight: 500;
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--brun-doux);
+  text-align: center;
+  opacity: 0;
+  animation: loader-fade 600ms linear 620ms forwards;
+}
+.site-loader__sub em {
+  font-family: var(--f-display);
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0;
+}
+@keyframes loader-fade { to { opacity: 1; } }
 
 @media (prefers-reduced-motion: reduce) {
   .site-loader { display: none; }
