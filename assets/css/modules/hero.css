@@ -1,0 +1,256 @@
+/* =========================================================================
+   HERO — le mur de la façade : crème en haut, soubassement rose en bas,
+   l'enseigne accrochée sous sa réglette, lumière de feuillage qui danse.
+   ========================================================================= */
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background: var(--creme);
+  overflow: clip;
+}
+
+/* ---------- Lumière tamisée (ombres de feuillage stylisées) ---------- */
+.hero__light {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero__blob {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 248, 234, 0.9), transparent);
+  mix-blend-mode: soft-light;
+}
+.hero__blob--1 {
+  width: 55vmax; height: 42vmax;
+  top: -12%; left: -10%;
+  animation: blob-drift-1 27s var(--ease-io) infinite alternate;
+}
+.hero__blob--2 {
+  width: 46vmax; height: 38vmax;
+  top: 16%; right: -16%;
+  background: radial-gradient(closest-side, rgba(70, 51, 40, 0.06), transparent);
+  animation: blob-drift-2 33s var(--ease-io) infinite alternate;
+}
+.hero__blob--3 {
+  width: 30vmax; height: 26vmax;
+  bottom: -6%; left: 22%;
+  background: radial-gradient(closest-side, rgba(255, 244, 226, 0.7), transparent);
+  animation: blob-drift-1 24s var(--ease-io) -12s infinite alternate-reverse;
+}
+@keyframes blob-drift-1 { to { translate: 6vmax 3vmax; } }
+@keyframes blob-drift-2 { to { translate: -5vmax -3vmax; } }
+
+/* ---------- Barre haute ---------- */
+.hero__top {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 20px var(--pad) 0;
+}
+.hero__eyebrow {
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--brun-doux);
+  white-space: nowrap;
+}
+@media (min-width: 900px) {
+  .hero__eyebrow { font-size: 0.66rem; letter-spacing: 0.28em; }
+}
+.hero__eyebrow--right { text-align: right; }
+@media (max-width: 899px) {
+  .hero__top { justify-content: center; }
+  .hero__eyebrow--right { display: none; }
+}
+.hero__amp { font-family: var(--f-display); font-style: italic; text-transform: none; letter-spacing: 0; }
+
+/* ---------- Scène : enseigne(s) ---------- */
+.hero__stage {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(2rem, 6vw, 6rem);
+  padding: 4svh var(--pad) 6svh;
+}
+
+.hero__enseigne { text-align: center; }
+
+.hero__reglette {
+  display: block;
+  width: 62%;
+  height: 10px;
+  border-radius: 3px;
+  margin: 0 auto 10px;
+  background: linear-gradient(180deg, var(--brun) 0%, #5a4433 100%);
+  position: relative;
+}
+.hero__reglette::after {
+  content: '';
+  position: absolute;
+  left: 4%; right: 4%; top: 100%;
+  height: 70px;
+  background: radial-gradient(60% 100% at 50% 0%, rgba(255, 244, 224, 0.6), transparent 78%);
+  pointer-events: none;
+}
+.hero__reglette--small { width: 46%; height: 7px; margin-bottom: 10px; }
+
+.hero__panel {
+  --clip-radius: 3px;
+  background: var(--panneau);
+  border-radius: 3px;
+  box-shadow:
+    0 24px 50px -22px rgba(60, 45, 35, 0.38),
+    0 4px 14px -6px rgba(60, 45, 35, 0.18);
+  padding: clamp(2.2rem, 7vw, 3.8rem) clamp(2.6rem, 9vw, 4.6rem) clamp(1.9rem, 5.5vw, 3rem);
+}
+
+.hero__title {
+  font-family: var(--f-display);
+  font-weight: 560;
+  font-size: clamp(4.6rem, 23vw, 9.5rem);
+  line-height: 0.94;
+  letter-spacing: 0.05em;
+  color: var(--brun);
+}
+.hero__row { display: block; }
+.hero__row--rose { color: var(--rose); }
+
+.hero__baseline {
+  margin-top: clamp(1.1rem, 3.5vw, 1.8rem);
+  font-family: var(--f-sans);
+  font-weight: 500;
+  font-size: clamp(0.72rem, 2.6vw, 0.95rem);
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--brun);
+  white-space: nowrap;
+}
+.hero__baseline em { font-style: normal; color: var(--rose); }
+
+/* ---------- Panneau secondaire (desktop) — celui de la porte ---------- */
+.hero__side { display: none; }
+
+/* ---------- Soubassement rose ---------- */
+.hero__band {
+  --top: 100%;               /* se peint en montant */
+  position: relative;
+  z-index: 1;
+  background: var(--rose);
+  color: var(--creme-sur-rose);
+}
+.hero__band-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+  padding: 2rem var(--pad) 2.4rem;
+}
+.hero__band-script {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 480;
+  font-size: clamp(1.7rem, 6vw, 2.6rem);
+  line-height: 1;
+}
+.hero__band-info {
+  font-size: 0.78rem;
+  font-weight: 450;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.92;
+}
+.hero__scroll {
+  margin-top: 0.7rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  text-decoration: none;
+  opacity: 0.85;
+  transition: opacity var(--dur-fast) linear, translate var(--dur-fast) var(--ease-io);
+}
+.hero__scroll:hover { opacity: 1; translate: 0 3px; }
+
+/* ---------- Desktop ---------- */
+@media (min-width: 900px) {
+  .hero__top { padding-top: 28px; }
+  .hero__title { font-size: min(10rem, 21vh); }
+  .hero__panel {
+    padding: clamp(1.8rem, 4.5vh, 3rem) clamp(2.6rem, 9vw, 4.2rem) clamp(1.6rem, 3.6vh, 2.4rem);
+  }
+  .hero__stage { justify-content: center; padding-top: 2svh; padding-bottom: 4svh; }
+
+  .hero__side {
+    display: block;
+    align-self: flex-end;
+    margin-bottom: -1svh;
+    text-align: center;
+  }
+  .hero__panel--small {
+    padding: 2rem 2.4rem 1.7rem;
+    box-shadow:
+      0 18px 40px -20px rgba(60, 45, 35, 0.35),
+      0 3px 10px -5px rgba(60, 45, 35, 0.16);
+  }
+  .hero__side-kicker {
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--brun-doux);
+  }
+  .hero__side-script {
+    margin-top: 0.7rem;
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 520;
+    font-size: 1.7rem;
+    color: var(--brun);
+    white-space: nowrap;
+  }
+
+  .hero__band-inner {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    text-align: left;
+    padding-top: 2.2rem;
+    padding-bottom: 2.4rem;
+  }
+  .hero__scroll { margin-top: 0; }
+}
+
+/* ---------- Chorégraphie d'ouverture ----------
+   1. le soubassement se peint  2. la réglette s'allume  3. le panneau
+   se révèle sous sa lumière  4. SO / CO / CO montent  5. la baseline. */
+.hero__band[data-reveal="clip"]          { --local-offset: 0ms; }
+.hero__eyebrow[data-reveal]              { --local-offset: 80ms; }
+.hero__eyebrow--right[data-reveal]       { --local-offset: 160ms; }
+.hero__reglette[data-reveal="line"]      { --local-offset: 260ms; }
+.hero__panel[data-reveal="clip"]         { --local-offset: 420ms; }
+.hero__row[data-reveal="mask"]:nth-child(1) { --local-offset: 640ms; }
+.hero__row[data-reveal="mask"]:nth-child(2) { --local-offset: 730ms; }
+.hero__row[data-reveal="mask"]:nth-child(3) { --local-offset: 820ms; }
+.hero__baseline[data-reveal]             { --local-offset: 1150ms; }
+.hero__side[data-reveal]                 { --local-offset: 1000ms; }
+
+/* Mobile : budget motion réduit — un seul blob */
+@media (max-width: 768px) {
+  .hero__blob--2, .hero__blob--3 { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__blob { animation: none; }
+}

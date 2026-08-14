@@ -1,0 +1,250 @@
+/* =========================================================================
+   SO COCO — base : fontes, tokens, reset, motion system, utilitaires
+   DA « Le mur en rose » — le site est la façade : crème en haut, rose en bas.
+   ========================================================================= */
+
+/* ---------- Fontes (self-host, latin, variable) ---------- */
+@font-face {
+  font-family: 'Bodoni Moda';
+  src: url('../fonts/bodoni-moda.woff2') format('woff2');
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Bodoni Moda';
+  src: url('../fonts/bodoni-moda-italic.woff2') format('woff2');
+  font-weight: 400 800;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Jost';
+  src: url('../fonts/jost.woff2') format('woff2');
+  font-weight: 300 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Tokens ---------- */
+:root {
+  /* Palette relevée sur l'enseigne et la façade */
+  --creme:      #ecdfd0;   /* mur haut */
+  --panneau:    #f6efe5;   /* panneau d'enseigne */
+  --rose:       #d9a181;   /* soubassement / lettres SO */
+  --rose-clair: #e5b99e;
+  --rose-pale:  #f0d6c3;
+  --brun:       #463328;   /* lettres CO CO, réglette */
+  --brun-doux:  #6d5645;
+  --kraft:      #c79d72;
+  --encre:      #3c2d23;   /* texte courant sur crème */
+  --creme-sur-rose: #f8f1e7;
+
+  --f-display: 'Bodoni Moda', 'Didot', Georgia, serif;
+  --f-sans: 'Jost', 'Futura', 'Avenir Next', sans-serif;
+
+  /* Courbes & durées */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-io:  cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 250ms;
+  --dur-base: 600ms;
+  --dur-slow: 950ms;
+  --stagger-base: 550ms;
+  --stagger-step: 350ms;
+
+  --pad: clamp(20px, 5vw, 72px);
+  --radius: 8px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --dur-base: 450ms; --dur-slow: 700ms;
+    --stagger-base: 350ms; --stagger-step: 200ms;
+  }
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--f-sans);
+  font-weight: 380;
+  color: var(--encre);
+  background: var(--creme);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+ol, ul { list-style: none; }
+figure { margin: 0; }
+
+::selection { background: var(--rose); color: var(--creme-sur-rose); }
+
+/* ---------- Utilitaires DA ---------- */
+
+/* Kicker — étiquette Jost espacée, comme « PÂTISSERIE BOULANGERIE » */
+.kicker {
+  font-family: var(--f-sans);
+  font-weight: 500;
+  font-size: 0.72rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--brun-doux);
+}
+.kicker--creme { color: var(--creme-sur-rose); opacity: 0.85; }
+
+/* Cadre photo — rectangle coins doux, jamais d'arche, jamais de scale */
+.frame {
+  display: block;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--rose-pale);
+}
+.frame img { width: 100%; --radius: 0px; }
+
+figcaption {
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 450;
+  margin-top: 0.8rem;
+  opacity: 0.75;
+}
+
+/* Réglette lumineuse — la barre brune au-dessus des panneaux accrochés */
+.reglette {
+  display: block;
+  width: 38%;
+  max-width: 190px;
+  height: 9px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, var(--brun) 0%, #5a4433 100%);
+  margin: 0 auto 14px;
+  position: relative;
+}
+.reglette::after {
+  content: '';
+  position: absolute;
+  left: 6%; right: 6%; top: 100%;
+  height: 46px;
+  background: radial-gradient(60% 100% at 50% 0%, rgba(255, 244, 224, 0.55), transparent 75%);
+  pointer-events: none;
+}
+
+/* Bouton ligne — texte + filet qui glisse */
+.btn-ligne {
+  display: inline-block;
+  font-weight: 480;
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding-bottom: 3px;
+  background: linear-gradient(currentColor, currentColor) no-repeat 0 100% / 100% 1px;
+  transition: background-size var(--dur-fast) var(--ease-io);
+}
+.btn-ligne:hover { background-size: 34% 1px; }
+
+/* =========================================================================
+   MOTION SYSTEM — délais composables, animations paused → running
+   ========================================================================= */
+
+[data-module-delay] { --module-delay: 0ms; }
+[data-reveal], [data-split] {
+  --column-delay: 0ms;
+  --self-delay: 0ms;
+  --local-offset: 0ms;
+  --index: 0;
+  --stagger: 0ms;
+  --delay: calc(
+    var(--module-delay, 0ms) + var(--column-delay) + var(--self-delay)
+    + var(--index) * var(--stagger) + var(--local-offset)
+  );
+}
+
+[data-module-delay] > [data-reveal]:nth-child(2) { --self-delay: 90ms; }
+[data-module-delay] > [data-reveal]:nth-child(3) { --self-delay: 180ms; }
+[data-module-delay] > [data-reveal]:nth-child(4) { --self-delay: 270ms; }
+[data-module-delay] > [data-reveal]:nth-child(5) { --self-delay: 360ms; }
+[data-module-delay] > [data-reveal]:nth-child(6) { --self-delay: 450ms; }
+
+@keyframes v-fade      { from { opacity: 0; } }
+@keyframes v-translate { from { translate: var(--tx, 0px) var(--ty, 0px); } }
+@keyframes v-scaleX    { from { scale: var(--sx, 1) 1; } }
+@keyframes v-clip {
+  from { clip-path: inset(var(--top, 0%) var(--right, 0%) var(--bottom, 0%) var(--left, 0%) round var(--clip-radius, 0px)); }
+  to   { clip-path: inset(0% 0% 0% 0% round var(--clip-radius, 0px)); }
+}
+
+/* Reveal par défaut : translation + fondu */
+html.--js-inview-enabled [data-reveal]:not([data-reveal="mask"]):not([data-reveal="clip"]):not([data-reveal="line"]) {
+  --ty: 1.5rem;
+  animation:
+    v-translate var(--dur-base, 600ms) var(--ease-out, ease) var(--delay, 0ms) backwards,
+    v-fade      var(--dur-base, 600ms) linear               var(--delay, 0ms) backwards;
+  animation-play-state: paused, paused;
+}
+html.--js-inview-enabled [data-reveal]:not([data-reveal="mask"]):not([data-reveal="clip"]):not([data-reveal="line"]).is-inview {
+  animation-play-state: running, running;
+}
+
+/* Masque overflow — le parent masque, l'enfant monte */
+html.--js-inview-enabled [data-reveal="mask"] { overflow: hidden; }
+html.--js-inview-enabled [data-reveal="mask"] > * {
+  display: block;
+  --ty: 105%;
+  animation: v-translate var(--dur-slow, 950ms) var(--ease-out, ease) var(--delay, 0ms) backwards;
+  animation-play-state: paused;
+}
+html.--js-inview-enabled [data-reveal="mask"].is-inview > * { animation-play-state: running; }
+
+/* Clip — révéler une image sans scale. Par défaut : du haut vers le bas,
+   comme la lumière d'une réglette qui balaie le panneau. */
+html.--js-inview-enabled [data-reveal="clip"] {
+  --top: 0%; --right: 0%; --bottom: 100%; --left: 0%;
+  animation: v-clip var(--dur-slow, 950ms) var(--ease-out, ease) var(--delay, 0ms) backwards;
+  animation-play-state: paused;
+}
+html.--js-inview-enabled [data-reveal="clip"].is-inview { animation-play-state: running; }
+
+/* Filet qui s'étire */
+html.--js-inview-enabled [data-reveal="line"] {
+  --sx: 0;
+  transform-origin: center;
+  animation:
+    v-scaleX var(--dur-slow, 950ms) var(--ease-out, ease) var(--delay, 0ms) backwards,
+    v-fade   var(--dur-base, 600ms) linear               var(--delay, 0ms) backwards;
+  animation-play-state: paused, paused;
+}
+html.--js-inview-enabled [data-reveal="line"].is-inview { animation-play-state: running, running; }
+
+/* Stagger typographique par mot */
+.word { display: inline-block; overflow: hidden; vertical-align: top; }
+.word__inner { display: inline-block; }
+html.--js-inview-enabled [data-split] .word__inner {
+  --ty: 112%;
+  animation: v-translate var(--dur-slow, 950ms) var(--ease-out, ease)
+             calc(var(--delay, 0ms) + var(--word-index, 0) * var(--word-stagger, 60ms)) backwards;
+  animation-play-state: paused;
+}
+html.--js-inview-enabled [data-split].is-inview .word__inner { animation-play-state: running; }
+
+/* ---------- Accessibilité ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  html [data-reveal],
+  html [data-reveal] > *,
+  html [data-split] .word__inner {
+    animation: none !important;
+    opacity: 1 !important;
+    translate: none !important;
+    clip-path: none !important;
+  }
+}

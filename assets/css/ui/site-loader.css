@@ -1,0 +1,44 @@
+/* Loader — l'enseigne se compose : SO / CO / CO montent dans leurs masques */
+/* Sans JS, personne ne retirera le loader : il n'existe qu'avec JS actif */
+.site-loader { display: none; }
+
+html.js .site-loader {
+  position: fixed;
+  inset: 0;
+  height: 100lvh;
+  z-index: 999;
+  background: var(--creme);
+  display: grid;
+  place-items: center;
+  opacity: 1;
+  will-change: opacity;
+}
+.site-loader.--js-ready {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 300ms linear;
+}
+
+.site-loader__mark {
+  font-family: var(--f-display);
+  font-weight: 560;
+  font-size: clamp(2.4rem, 9vw, 3.6rem);
+  line-height: 0.98;
+  letter-spacing: 0.04em;
+  color: var(--brun);
+  text-align: center;
+}
+.site-loader__row { display: block; overflow: hidden; }
+.site-loader__row > span { display: block; translate: 0 110%; }
+.site-loader__row:first-child { color: var(--rose); }
+.site-loader__row:first-child em { font-style: normal; }
+
+.site-loader__row:nth-child(1) > span { animation: loader-rise 700ms var(--ease-out) 120ms forwards; }
+.site-loader__row:nth-child(2) > span { animation: loader-rise 700ms var(--ease-out) 240ms forwards; }
+.site-loader__row:nth-child(3) > span { animation: loader-rise 700ms var(--ease-out) 360ms forwards; }
+
+@keyframes loader-rise { to { translate: 0 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .site-loader { display: none; }
+}

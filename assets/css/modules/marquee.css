@@ -1,0 +1,31 @@
+/* Marquee — bandeau brun entre le mur et la suite */
+.marquee {
+  background: var(--brun);
+  color: var(--creme);
+  overflow: hidden;
+  padding: 0.85rem 0;
+}
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 38s linear infinite;
+}
+.marquee__group {
+  display: inline-block;
+  white-space: nowrap;
+  font-size: 0.78rem;
+  font-weight: 450;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  padding-right: 2.4rem;
+}
+.marquee__group i {
+  font-style: normal;
+  color: var(--rose-clair);
+  margin: 0 1.1rem;
+}
+@keyframes marquee-scroll { to { translate: -50% 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track { animation: none; }
+}

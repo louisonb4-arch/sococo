@@ -1,0 +1,50 @@
+/* =========================================================================
+   LA MAISON — mur crème, panneaux photo accrochés, composition asymétrique
+   ========================================================================= */
+
+.maison {
+  background: var(--creme);
+  padding: clamp(4.5rem, 12vw, 8.5rem) var(--pad) clamp(4rem, 10vw, 7rem);
+}
+
+.maison__head { max-width: 1200px; margin: 0 auto; }
+
+.maison__title {
+  font-family: var(--f-display);
+  font-weight: 520;
+  font-size: clamp(2.1rem, 8vw, 4.4rem);
+  line-height: 1.08;
+  color: var(--brun);
+  margin-top: 1rem;
+  max-width: 14ch;
+}
+
+.maison__grid {
+  max-width: 1200px;
+  margin: clamp(2.5rem, 7vw, 5rem) auto 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2.5rem, 8vw, 4rem);
+}
+
+.maison__text {
+  max-width: 54ch;
+  font-size: clamp(1rem, 2.5vw, 1.12rem);
+  display: grid;
+  gap: 1.1rem;
+}
+.maison__text strong { font-weight: 550; }
+
+.maison__photo { max-width: 480px; }
+.maison__photo--porte { justify-self: end; width: 82%; }
+.maison__photo--equipe { justify-self: start; width: 88%; margin-top: -0.5rem; }
+
+@media (min-width: 900px) {
+  .maison__grid {
+    grid-template-columns: 5fr 4fr 4fr;
+    align-items: start;
+  }
+  .maison__text { grid-column: 1; padding-top: 1.5rem; }
+  .maison__photo--porte { grid-column: 2; width: 100%; margin-top: 4.5rem; }
+  .maison__photo--equipe { grid-column: 3; width: 100%; margin-top: 0; }
+}

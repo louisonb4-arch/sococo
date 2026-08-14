@@ -1,0 +1,80 @@
+/* Footer — le bois sombre de la réglette */
+.site-footer {
+  background: var(--brun);
+  color: var(--creme);
+  padding: clamp(3.5rem, 9vw, 5.5rem) var(--pad) 2.2rem;
+}
+
+.site-footer__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 1.4rem;
+}
+
+.site-footer__mark {
+  font-family: var(--f-display);
+  font-weight: 560;
+  font-size: 2.4rem;
+  line-height: 0.98;
+  letter-spacing: 0.05em;
+}
+.site-footer__mark span { display: block; }
+.site-footer__mark span:first-child { color: var(--rose-clair); }
+
+.site-footer__tag {
+  font-size: 0.72rem;
+  font-weight: 450;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.site-footer__nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.4rem 2rem;
+  margin-top: 0.6rem;
+}
+.site-footer__nav a {
+  font-size: 0.82rem;
+  font-weight: 460;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: linear-gradient(currentColor, currentColor) no-repeat 0 100% / 0 1px;
+  padding-bottom: 3px;
+  transition: background-size var(--dur-fast) var(--ease-io);
+}
+.site-footer__nav a:hover { background-size: 100% 1px; }
+
+.site-footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem 1.8rem;
+}
+.site-footer__legal a {
+  font-size: 0.75rem;
+  opacity: 0.75;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity var(--dur-fast) linear;
+}
+.site-footer__legal a:hover { opacity: 1; }
+
+.site-footer__credit {
+  margin-top: 1.6rem;
+  padding-top: 1.4rem;
+  width: 100%;
+  border-top: 1px solid rgba(236, 223, 208, 0.18);
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+.site-footer__credit a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
